@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>RegistrationForm_v3 by Colorlib</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+		<link rel="stylesheet" href="{% static 'signup/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css' %}">
+
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="{% static 'signup/css/style.css' %}">
+	</head>
+
+	<body>
+
+<div class="wrapper" style="background-image: url('{% static 'signup/images/background_img.jpg' %}');">
+			<div class="inner">
+				<form method="POST" action="{% url 'save_signup' %}">
+					{% csrf_token %}
+					<h3>Registration Form</h3>
+					<div class="form-group">
+						<div class="form-wrapper">
+							<label for="">Username:</label>
+							<div class="form-holder">
+								<i class="zmdi zmdi-account-o"></i>
+								<input type="text" name="Username" class="form-control">
+							</div>
+						</div>
+						<div class="form-wrapper">
+							<label for="">Email:</label>
+							<div class="form-holder">
+								<i style="font-style: normal; font-size: 15px;">@</i>
+								<input type="text" name="email" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-wrapper">
+							<label for="">Password:</label>
+							<div class="form-holder">
+								<i class="zmdi zmdi-lock-outline"></i>
+								<input type="password" name="passwoord" class="form-control" placeholder="********">
+							</div>
+						</div>
+						<div class="form-wrapper">
+							<label for="">Repeat Password:</label>
+							<div class="form-holder">
+								<i class="zmdi zmdi-lock-outline"></i>
+								<input type="password" name="REAPEAT" class="form-control" placeholder="********">
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-wrapper">
+    <label for="phone">Phone Number:</label>
+    <div class="form-holder">
+        <input type="tel" name="phone" id="phone" class="form-control" placeholder="+91 9876543210" required>
+        <i class="zmdi zmdi-phone"></i>
+    </div>
+</div>
+
+						<div class="form-wrapper">
+							<label for="">Gender:</label>
+							<div class="form-holder select">
+								<select name="gender" id="" class="form-control">
+									<option value="male">Male</option>
+									<option value="female">Female</option>
+									<option value="other">Other</option>
+								</select>
+								<i class="zmdi zmdi-face"></i>
+							</div>
+						</div>
+					</div>
+					<div class="form-end">
+<!--						<div class="checkbox">-->
+<!--							<label>-->
+<!--								<input type="checkbox"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.-->
+<!--								<span class="checkmark"></span>-->
+<!--							</label>-->
+<!--						</div>-->
+						<div class="button-holder">
+							<button>Register Now</button>
+						</div>
+						<div class="login-section">
+    <p>Already have an account?</p>
+    <a href="{% url 'signin_page' %}" class="login-link">Login Here</a>
+</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

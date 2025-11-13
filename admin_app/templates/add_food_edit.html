@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">ADD FOOD</h4>
+                    <p class="card-description"> FOODS </p>
+                    <form class="forms-sample" method="POST" action="{% url 'update_food' update_id=products.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                      <div class="form-group">
+                        <label for="exampleInputName1">Food</label>
+                        <input type="text" class="form-control" id="exampleInputName1" name="food_name" placeholder="Name" value="{{products.FOOD_NAME}}">
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleInputEmail3">Price</label>
+                        <input type="text" class="form-control" id="exampleInputEmail3" name="food_price" placeholder="Price" value="{{products.FOOD_PRICE}}">
+                      </div>
+<!--                      <div class="form-group">-->
+<!--                        <label for="exampleInputPassword4">Password</label>-->
+<!--                        <input type="password" class="form-control" id="exampleInputPassword4" placeholder="Password">-->
+<!--                      </div>-->
+                      <div class="form-group">
+                        <label for="exampleSelectGender">CATAGORY</label>
+                        <select class="form-control" id="exampleSelectGender" name="food_catagory">
+                          <option selected>{{products.FOOD_CATAGORY}} </option>
+                            {% for i in catagories %}
+                          <option>{{i.NAME}}</option>
+
+                            {% endfor %}
+                        </select>
+                      </div>
+<!--                      <div class="form-group">-->
+<!--                        <label for="exampleInputCity1">City</label>-->
+<!--                        <input type="text" class="form-control" id="exampleInputCity1" placeholder="Location">-->
+<!--                      </div>-->
+                        <div class="form-group">
+                        <label>File upload</label>
+                          <img src="{{ products.FOOD_IMAGE.url}}" width="100px">
+                        <input type="file" name="img[]" class="file-upload-default">
+                        <div class="input-group col-xs-12">
+                          <input type="file" class="form-control file-upload-info" name="food_file"  placeholder="Upload Image">
+                          <span class="input-group-append">
+                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleTextarea1" name="food_description" rows="4">{{products.FOOD_DESCRIPTION}}</textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary me-2">UPDATE</button>
+                      <button class="btn btn-dark">Cancel</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+</body>
+</html>
+{% endblock %}

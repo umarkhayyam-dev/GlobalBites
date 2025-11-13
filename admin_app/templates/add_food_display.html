@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table table-bordered">
+  <tr>
+    <th>NAME</th>
+    <th>PRICE</th>
+    <th>CATAGORY</th>
+    <th>FILE UPLOAD</th>
+    <th>DESCRIPTION</th>
+  </tr>
+  {% for i in data %}
+  <tr>
+    <td>{{i.FOOD_NAME}}</td>
+    <td>{{i.FOOD_PRICE}}</td>
+    <td>{{i.FOOD_CATAGORY}}</td>
+    <td>
+      <img src="{{i.FOOD_IMAGE.url}}" width="100px">
+    </td>
+    <td>{{i.FOOD_DESCRIPTION}}</td>
+    <td>
+       <a href="{% url 'edit_add_food' edit_id=i.id %}">
+                <button type="submit" class="btn btn-success">EDIT</button>
+            </a>
+
+            <a>
+                <button type="submit" class="btn btn-danger">DELETE</button>
+            </a>
+    </td>>
+  </tr>
+  {% endfor %}
+</table>
+</body>
+</html>
+{% endblock %}
