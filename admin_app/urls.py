@@ -17,6 +17,7 @@ urlpatterns=[
     path('display_add_food/',views.display_add_food,name="display_add_food"),
     path('edit_add_food/<int:edit_id>/',views.edit_add_food,name="edit_add_food"),
     path('update_food/<int:update_id>/',views.update_food,name="update_food"),
+    path('delete_food/<int:pro_id>/',views.delete_food,name="delete_food"),
 
     path('login_function/',views.login_function,name="login_function"),
     path('admin_login/',views.admin_login,name="admin_login"),

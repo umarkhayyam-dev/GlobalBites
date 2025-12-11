@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate,login
 
 from admin_app.models import CatagoryDB,FoodDB
 from webapp.models import ContactDB
+from django.contrib import messages
 
 import datetime
 
@@ -27,6 +28,7 @@ def save_catagory(request):
         catogary_description=request.POST.get('catagory_description')
         obj=CatagoryDB(NAME=catogary_name,IMAGE=catogary_image,DESCRIPTION=catogary_description)
         obj.save()
+        messages.success(request,message="THE DATA HAS BEEN SAVED SUCCESSFULLY")
         return redirect(add_catagory)
 
 def add_catagory_display(request):
@@ -35,6 +37,7 @@ def add_catagory_display(request):
 
 def add_catagory_edit(request,product_id):
     product=CatagoryDB.objects.get(id=product_id)
+
     return render(request,template_name="add_catagory_edit.html",context={'product':product})
 
 def update_catagory(request,p_id):
@@ -48,10 +51,12 @@ def update_catagory(request,p_id):
         except MultiValueDictKeyError:
             file=CatagoryDB.objects.get(id=p_id).IMAGE
         CatagoryDB.objects.filter(id=p_id).update(NAME=catogary_name,IMAGE=file,DESCRIPTION=catogary_description)
+        messages.success(request, message="UPDATED SUCCESS FULLY")
         return redirect(add_catagory_display)
 def delete_catagory(request,pro_id):
     delete=CatagoryDB.objects.get(id=pro_id)
     delete.delete()
+    messages.success(request, message="DELETED SUCCESS FULLY")
     return redirect(add_catagory_display)
 
 
@@ -71,6 +76,7 @@ def save_add_food(request):
         DESCRIPTION=request.POST.get('food_description')
         obj=FoodDB(FOOD_NAME=NAME,FOOD_CATAGORY=CATAGORY,FOOD_PRICE=PRICE,FOOD_DESCRIPTION=DESCRIPTION,FOOD_IMAGE=FILE_UPLOAD)
         obj.save()
+        messages.success(request,message="NEW FOOD IS SAVED SUCCESSFULLY")
         return redirect(add_food)
 
 def display_add_food(request):
@@ -94,7 +100,14 @@ def update_food(request,update_id):
         except MultiValueDictKeyError:
             file=FoodDB.objects.get(id=update_id).FOOD_IMAGE
         FoodDB.objects.filter(id=update_id).update(FOOD_NAME=NAME,FOOD_CATAGORY=CATAGORY,FOOD_PRICE=PRICE,FOOD_DESCRIPTION=DESCRIPTION,FOOD_IMAGE=file)
+        messages.success(request,message="FOOD HAS UPDATED")
         return redirect(display_add_food)
+
+def delete_food(request,pro_id):
+    delete_food=FoodDB.objects.get(id=pro_id)
+    delete_food.delete()
+    messages.success(request, message="DELETED SUCCESS FULLY")
+    return redirect(display_add_food)
 
 def login_function(request):
     return render(request,template_name="login.html")

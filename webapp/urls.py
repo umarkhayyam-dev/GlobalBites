@@ -13,6 +13,13 @@ urlpatterns=[
     path('save_signup/',views.save_signup,name="save_signup"),
     path('logout_function/',views.logout_function,name="logout_function"),
 
+    path('cart_page/',views.cart_page,name="cart_page"),
+    path('add_to_cart/<int:food_id>',views.add_to_cart,name="add_to_cart"),
+    path('checkout_page/',views.checkout_page,name="checkout_page"),
+    path('order_confirm/',views.order_confirm,name="order_confirm"),
+    path('payment/',views.payment,name="payment"),
+
+
 
 
 

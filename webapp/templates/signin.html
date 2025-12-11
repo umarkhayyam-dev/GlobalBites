@@ -33,7 +33,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="POST" action="{% url 'signin_page' %}">
+				<form class="login100-form validate-form" name="form1" method="POST" action="{% url 'signin_page' %}" onsubmit="password_Validation()">
 					{% csrf_token %}
 					<span class="login100-form-title p-b-43">
 						Login to continue
@@ -118,6 +118,29 @@
 	<script src="{% static 'signin/vendor/countdowntime/countdowntime.js' %}"></script>
 <!--===============================================================================================-->
 	<script src="{% static 'signin/js/main.js' %}"></script>
+<script>
+    function password_Validation() {
+        let p1 = document.form1.email.value;
+        let p2 = document.form1.pass.value;
+
+        if (p1 == "") {
+            alert("email cant be null");
+            return false;
+        }
+        else if (p2 == "") {
+            alert("password cant be null");
+            return false;
+        }
+        else if (p2.length < 6) {
+            alert("Password must contain 6 characters");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+
 
 </body>
 </html>

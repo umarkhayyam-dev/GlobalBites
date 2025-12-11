@@ -77,7 +77,7 @@
 
             <div class="container-xxl py-5 bg-dark hero-header mb-5">
                 <div class="container text-center my-5 pt-5 pb-4">
-                    <h1 class="display-3 text-white mb-3 animated slideInDown">Try Our {{foods_single.FOOD_NAME}}</h1>
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Welcome to checkout page</h1>
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center text-uppercase">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
@@ -92,49 +92,71 @@
 
 
         <!-- Product Details -->
-<div class="container py-5">
-    <div class="row align-items-center">
-        <!-- Food Image -->
-        <div class="col-lg-6 text-center">
-            <img src="{{ foods_single.FOOD_IMAGE.url }}" alt="{{ foods_single.FOOD_NAME }}" class="img-fluid rounded shadow" style="max-width: 90%; border-radius: 20px;">
-        </div>
+<form class="bg-white p-4 border border-2 rounded shadow-sm"
+              method="POST" action="{% url 'order_confirm' %}">
+            {% csrf_token %}
 
-        <!-- Food Info -->
-        <div class="col-lg-6 mt-4 mt-lg-0">
-            <h2 class="text-primary fw-bold mb-3">{{ foods_single.FOOD_NAME }}</h2>
-            <h5 class="text-muted mb-3">Category: <span class="text-dark">{{ foods_single.FOOD_CATAGORY }}</span></h5>
-            <h3 class="text-warning mb-4"> Price {{ foods_single.FOOD_PRICE }}</h3>
-            <input type="hidden" id="price" name="price" value="{{ foods_single.FOOD_PRICE }}">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Full Name</label>
+                <input type="text" name="fullname" class="form-control" placeholder="Enter your name" required>
+            </div>
 
-            <p class="text-muted mb-4" style="line-height: 1.7;">
-                {{ foods_single.FOOD_DESCRIPTION }}
-            </p>
-              <!-- Quantity and Add to Cart -->
-            <form method="POST" action="{% url 'add_to_cart' foods_single.id %}">
-                {% csrf_token %}
-                <div class="d-flex align-items-center mb-4">
-                    <label for="quantity" class="me-3 fw-bold">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="form-control w-25 text-center" style="border-radius: 10px;">
-                     <label for="quantity" class="me-3 fw-bold">TOTAL PRICE:</label>
-                    <input type="number" id="Total" name="TotalPrice" value="1" min="1" class="form-control w-25 text-center" style="border-radius: 10px;">
-                </div>
-                {% if request.session.Username %}
-              <button type="submit" class="btn text-white px-4 py-2"
-            style="background-color: #FEA116; border-radius: 30px;">
-        <i class="fa fa-shopping-cart me-2"></i> Add to Cart
-    </button>
-                    {% else %}
-               <a href="{% url 'signin_page' %}" class="btn text-white px-4 py-2"
-   style="background-color: #FEA116; border-radius: 30px;">
-    <i class="fa fa-shopping-cart me-2"></i> Login to add to cart
-</a>
-                {% endif %}
+            <div class="mb-3">
+                <label class="form-label fw-bold">Mobile Number</label>
+                <input type="text" name="mobile" class="form-control" placeholder="Enter contact number" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Address</label>
+                <textarea name="address" class="form-control" placeholder="House No, Street, Area"
+                          rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Pincode</label>
+                <input type="text" name="pincode" class="form-control" placeholder="Enter pincode" required>
+            </div>
+    <div class="mb-3">
+
+<input type="hidden" name="total_amount" value="{{total_amount}}">            </div>
+
+          <button type="submit"
+        class="btn w-100 text-white fw-bold py-2"
+        style="background:#0d6efd; border-radius:30px;">
+    Proceed to Payment
+</button>
+
+        </form>
 
 
-            </form>
-        </div>
+        <div style="width:280px; background:#ffffff; border:2px solid #0d6efd; padding:22px; border-radius:14px; font-family:Arial; box-shadow:0 0 12px rgba(0,0,0,0.08);">
+
+    <h3 style="margin-top:0; font-size:20px; font-weight:bold; color:#FEA116;">Cart Summary</h3>
+
+    <div style="display:flex; justify-content:space-between; margin:10px 0; font-size:15px;">
+        <span style="color:#333;">Subtotal</span>
+        <span style="color:#0d6efd; font-weight:600;">{{sub_total}}</span>
     </div>
+
+    <div style="display:flex; justify-content:space-between; margin:10px 0; font-size:15px;">
+        <span style="color:#333;">Delivery</span>
+        <span style="color:#0d6efd; font-weight:600;">{{deliver_charge}}</span>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; margin-top:12px; padding-top:12px; border-top:2px dashed #FEA116; font-weight:bold; font-size:18px;">
+        <span style="color:#333;">Total</span>
+        <span style="color:#FEA116;">{{total_amount}}</span>
+    </div>
+
+    <a href="#" style="text-decoration:none;">
+        <button style="width:100%; margin-top:18px; padding:12px; border:none; background:#0d6efd; color:#fff; font-size:17px; border-radius:30px; cursor:pointer; font-weight:600; transition:.3s;">
+            Proceed to Checkout
+        </button>
+    </a>
+
 </div>
+
+
 
 
         <!-- About Start -->
@@ -344,7 +366,7 @@
 
     <!-- Template Javascript -->
     <script src="{% static 'dashboard/js/main.js' %}"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function(){
     $("#quantity").change(function(){
@@ -357,4 +379,3 @@
 </script>
 </body>
 
-</html>
